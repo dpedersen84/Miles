@@ -1,8 +1,14 @@
-const path = require("path");
 const authController = require('../controller/authController.js');
 
 
 module.exports = (app, passport) => {
+
+    const isLoggedIn = (req, res, next) => {
+        if (req.isAuthenticated())
+            return next();
+
+        res.redirect('/login');
+    }
 
     app.get("/", (req, res) => {
         // res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -27,12 +33,4 @@ module.exports = (app, passport) => {
         successRedirect: '/user',
         failureRedirect: '/login'
     }));
-
-    isLoggedIn = (req, res, next) => {
-        if (req.isAuthenticated())
-            return next();
-
-        res.redirect('/login');
-    }
-
 }

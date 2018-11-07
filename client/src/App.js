@@ -1,33 +1,15 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from './pages/Login';
+import Trips from './pages/Trips';
 
-class App extends Component {
-  state = {
-    trips: [],
-  };
-
-  componentDidMount() {
-    this.loadTrips();
-
-  };
-
-  loadTrips = () => {
-    let userID = sessionStorage.getItem('userID');
-
-    axios.get(`/api/${userID}/trips`)
-      .then(res => {
-        this.setState({ trips: res.data })
-        console.log(res.data)
-      })
-  }
-  
-  render() {
-    return (
-      <div className="App">
-        <h1>MILES</h1>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/trips" component={Trips} />
+    </Switch>
+  </Router>
+);
 
 export default App;

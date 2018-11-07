@@ -12,7 +12,8 @@ const db = require("./models");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static("client/public/index.html"));
+// app.use(express.static("client/public/index.html"));
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
